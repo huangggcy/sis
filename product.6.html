@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>產品6 - 修復霜</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #ffffff;
+      color: #333;
+    }
+
+    .logo-wrapper {
+      background-color: white;
+      padding: 0.5rem 0;
+      margin: 0;
+      text-align: center;
+    }
+
+    .logo-wrapper a {
+      display: inline-block;
+    }
+
+    .logo {
+      width: 180px;
+      max-width: 80%;
+      height: auto;
+      cursor: pointer;
+    }
+
+    .nav-products {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      background-color: #f9f9f9;
+      padding: 0.8rem 1rem;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .nav-products a {
+      margin: 0.3rem 0.6rem;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      color: #333;
+      text-decoration: none;
+      background-color: #eeeeee;
+      border-radius: 6px;
+      transition: background-color 0.3s;
+    }
+
+    .nav-products a:hover {
+      background-color: #dcdcdc;
+    }
+
+    .section-top {
+      display: flex;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .left-image, .right-text {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+    }
+
+    .left-image img {
+      max-height: 90vh;
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    .right-text {
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .right-text h1 {
+      font-size: 2.5rem;
+      margin: 0 0 2rem 0; /* 上0、下2rem */
+      padding-top: 1.5rem; /* 額外推高一點 */
+    }
+
+
+    .price {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #d14c4c;
+      margin-bottom: 1.5rem;
+    }
+
+    .buy-button {
+      background-color: #0066cc;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .buy-button:hover {
+      background-color: #004b99;
+    }
+
+    .right-text p {
+      font-size: 1.5rem;
+      line-height: 1.8;
+      max-width: 90%;
+      white-space: pre-line;
+      margin-top: 2rem;
+    }
+
+    .section-bottom {
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .section-bottom p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+    }
+
+    .back-link {
+      display: block;
+      margin: 2rem auto;
+      text-align: center;
+      font-size: 1rem;
+      color: #0066cc;
+      text-decoration: none;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .section-top {
+        flex-direction: column;
+        height: auto;
+      }
+
+      .left-image img {
+        max-height: 60vh;
+      }
+
+      .right-text {
+        align-items: center;
+        text-align: center;
+        padding-top: 0;
+      }
+    }
+        .gallery {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .thumbnails {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .thumbnails img {
+      width: 60px;
+      height: auto;
+      border-radius: 6px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: border 0.2s;
+    }
+
+    .thumbnails img:hover {
+      border: 2px solid #666;
+    }
+
+    .main-image img {
+      max-height: 90vh;
+      max-width: 100%;
+      border-radius: 10px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- LOGO（可點擊跳首頁） -->
+  <div class="logo-wrapper">
+    <a href="index.html">
+      <img src="標誌.jpg" class="logo" alt="網站標誌">
+    </a>
+  </div>
+
+  <!-- 導覽列 -->
+  <div class="nav-products">
+    <a href="index.html">首頁</a>
+    <a href="product2.html">星雲蠶絲面膜皂</a>
+    <a href="product3.html">星煥美肌精華液</a>
+    <a href="product4.html">星眸緊緻賦活眼霜</a>
+    <a href="product5.html">星河絲柔撕拉面膜</a>
+    <a href="product5.html">星境再生晚安修復霜</a>
+  </div>
+
+  <!-- 上半部 -->
+  <div class="section-top">
+    <div class="left-image">
+      <img src="產品1.jpg" alt="產品1圖片">
+    </div>
+    <div class="right-text">
+      <h1>星境再生晚安修復霜</h1>
+      <div class="price">NT$1,290</div>
+      <button class="buy-button" onclick="window.location.href='#'">立即購買</button>
+      <p>
+#夜間持續修復
+結合羊胎盤萃取、膠原蛋白與玻尿酸三重修復力量，深層滋養並強化肌膚屏障
+#肌膚潤澤細緻
+維他命B3與金縷梅萃取，有效淡化乾燥細紋並持續保濕
+      </p>
+    </div>
+  </div>
+
+  <!-- 下半部 -->
+  <div class="section-bottom">
+    <img src="產品原料.png" alt="產品原料">
+    <p>
+      這裡是下半部補充說明區塊，<br>
+      可放品牌理念、注意事項、或優惠活動資訊。
+    </p>
+  </div>
+
+  <!-- 返回首頁 -->
+  <a href="index.html" class="back-link">← 回到首頁</a>
+
+</body>
+</html>
