@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>產品2 - 星雲蠶絲手工皂</title>
+  <title>產品2 - 星雲蠶絲面膜皂</title>
   <style>
     * {
       box-sizing: border-box;
@@ -17,7 +17,6 @@
       color: #333;
     }
 
-    /* Logo 區塊 */
     .logo-wrapper {
       background-color: white;
       padding: 0.5rem 0;
@@ -25,13 +24,17 @@
       text-align: center;
     }
 
+    .logo-wrapper a {
+      display: inline-block;
+    }
+
     .logo {
       width: 180px;
       max-width: 80%;
       height: auto;
+      cursor: pointer;
     }
 
-    /* 導覽列 */
     .nav-products {
       display: flex;
       flex-wrap: wrap;
@@ -58,6 +61,7 @@
 
     .section-top {
       display: flex;
+      align-items: center;
       height: 100vh;
     }
 
@@ -69,13 +73,6 @@
       padding: 1rem;
     }
 
-    .left-image img {
-      max-height: 90vh;
-      max-width: 100%;
-      height: auto;
-      border-radius: 10px;
-    }
-
     .right-text {
       flex-direction: column;
       align-items: flex-start;
@@ -83,16 +80,15 @@
     }
 
     .right-text h1 {
-  font-size: 2.5rem;
-  margin: 0 0 2rem 0; /* 上0、下2rem */
-  padding-top: 1.5rem; /* 額外推高一點 */
-}
-
+      font-size: 2.5rem;
+      margin: 0 0 2rem 0; 
+      padding-top: 1.5rem; 
+    }
 
     .price {
       font-size: 1.5rem;
       font-weight: bold;
-      color: #d14c4c;
+      color: #4849e8;
       margin-bottom: 1.5rem;
     }
 
@@ -112,7 +108,7 @@
     }
 
     .right-text p {
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       line-height: 1.8;
       max-width: 90%;
       white-space: pre-line;
@@ -148,63 +144,111 @@
         height: auto;
       }
 
-      .left-image img {
-        max-height: 60vh;
-      }
-
       .right-text {
         align-items: center;
         text-align: center;
         padding-top: 0;
       }
     }
+
+    .gallery {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .thumbnails {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .thumbnails img {
+      width: 60px;
+      height: auto;
+      border-radius: 6px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: border 0.2s;
+    }
+
+    .thumbnails img:hover {
+      border: 2px solid #666;
+    }
+
+    .thumbnails img.active {
+      border: 2px solid #000;
+    }
+
+    .main-image img {
+      max-height: 90vh;
+      max-width: 100%;
+      border-radius: 10px;
+    }
   </style>
 </head>
 <body>
+  <div class="logo-wrapper">
+    <a href="index.html">
+      <img src="標誌.jpg" class="logo" alt="網站標誌">
+    </a>
+  </div>
 
-  <!-- 白底標誌 -->
- <div class="logo-wrapper">
-  <a href="index.html">
-    <img src="標誌.jpg" class="logo" alt="logo">
-  </a>
-</div>
-
-
-  <!-- 產品導覽列 -->
-  <div class="nav-products">
-  <a href="index.html">首頁</a>
-  <a href="product1.html">星境再生晚安修復霜</a>
-  <a href="product3.html">星煥美肌精華液</a>
-  <a href="product4.html">星眸緊緻賦活眼霜</a>
-  <a href="product5.html">星河絲柔撕拉面膜</a>
-</div>
-
-  <!-- 上半部：左右平均，滿版高 -->
-  <div class="section-top">
+ <div class="nav-products">
+    <a href="index.html">首頁</a>
+    <a href="product1.html">星境再生晚安修復霜</a>
+    <a href="product3.html">星煥美肌精華液</a>
+    <a href="product4.html">星眸緊緻賦活眼霜</a>
+    <a href="product5.html">星河絲柔撕拉面膜</a>
+  </div>
+  
+  <!-- 導覽列 -->
+   <div class="section-top">
     <div class="left-image">
-      <img src="產品2.jpg" alt="產品2圖片">
+      <div class="gallery">
+        <div class="thumbnails">
+          <img src="產品2.jpg" onclick="changeImage(this, '產品2.jpg')" class="active" />
+          <img src="眼霜 眼睛.jpg" onclick="changeImage(this, '眼霜 眼睛.jpg')" />
+          <img src="面霜 我.jpg" onclick="changeImage(this, '面霜 我.jpg')" />
+        </div>
+        <div class="main-image">
+          <img id="mainDisplay" src="產品2.jpg" alt="主圖" />
+        </div>
+      </div>
     </div>
+
     <div class="right-text">
-      <h1>星雲蠶絲手工皂</h1>
+      <h1>星雲蠶絲面膜皂</h1>
       <div class="price">NT$390</div>
       <button class="buy-button" onclick="window.location.href='#'">立即購買</button>
       <p>
 #適合全膚質每日使用
-嚴選橄欖油、甜杏仁油與荷荷巴油，以冷製皂工藝，保留植物滋養成分，富含蠶絲蛋白與維他命E，溫和潔淨同時深層滋潤
+嚴選橄欖油、甜杏仁油與荷荷巴油
+以冷製皂工藝，保留植物滋養成分
+富含蠶絲蛋白與維他命E，溫和潔淨同時深層滋潤
+
       </p>
     </div>
   </div>
 
-  <!-- 下半部：補充資訊 -->
   <div class="section-bottom">
+    <img src="產品原料.png" alt="產品原料">
     <p>
       這裡是下半部補充說明區塊，<br>
       可放品牌理念、注意事項、或優惠活動資訊。
     </p>
   </div>
 
-  <!-- 返回首頁 -->
   <a href="index.html" class="back-link">← 回到首頁</a>
 
+  <script>
+    function changeImage(thumb, newSrc) {
+      document.getElementById("mainDisplay").src = newSrc;
+      const allThumbs = document.querySelectorAll(".thumbnails img");
+      allThumbs.forEach(img => img.classList.remove("active"));
+      thumb.classList.add("active");
+    }
+  </script>
 </body>
 </html>
+
