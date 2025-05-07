@@ -242,13 +242,50 @@
   <a href="index.html" class="back-link">← 回到首頁</a>
 
   <script>
-    function changeImage(thumb, newSrc) {
-      document.getElementById("mainDisplay").src = newSrc;
-      const allThumbs = document.querySelectorAll(".thumbnails img");
-      allThumbs.forEach(img => img.classList.remove("active"));
-      thumb.classList.add("active");
+  const mainImage = document.getElementById("mainDisplay");
+  const thumbnails = Array.from(document.querySelectorAll(".thumbnails img"));
+  let currentIndex = 0;
+
+  // 設定初始索引
+  function updateImageByIndex(index) {
+    if (index < 0) index = thumbnails.length - 1;
+    if (index >= thumbnails.length) index = 0;
+    currentIndex = index;
+    const selectedThumb = thumbnails[currentIndex];
+    changeImage(selectedThumb, selectedThumb.src);
+  }
+
+  // 加入滑動事件監聽器
+  let startX = 0;
+  mainImage.addEventListener("touchstart", function(e) {
+    startX = e.touches[0].clientX;
+  });
+
+  mainImage.addEventListener("touchend", function(e) {
+    const endX = e.changedTouches[0].clientX;
+    const diffX = endX - startX;
+
+    if (Math.abs(diffX) > 50) {
+      if (diffX > 0) {
+        // 向右滑動（上一張）
+        updateImageByIndex(currentIndex - 1);
+      } else {
+        // 向左滑動（下一張）
+        updateImageByIndex(currentIndex + 1);
+      }
     }
-  </script>
+  });
+
+  // 原有點擊縮圖功能（更新 currentIndex）
+  function changeImage(thumb, newSrc) {
+    document.getElementById("mainDisplay").src = newSrc;
+    thumbnails.forEach((img, index) => {
+      img.classList.remove("active");
+      if (img === thumb) currentIndex = index;
+    });
+    thumb.classList.add("active");
+  }
+</script>
 </body>
 </html>
 
