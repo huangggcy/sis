@@ -184,6 +184,28 @@
       max-height: 90vh;
       max-width: 100%;
       border-radius: 10px;
+      cursor: zoom-in;
+    }
+
+    /* Modal 放大圖片樣式 */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0; top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      cursor: pointer;
     }
   </style>
 </head>
@@ -194,98 +216,123 @@
     </a>
   </div>
 
- <div class="nav-products">
+  <div class="nav-products">
     <a href="index.html">首頁</a>
     <a href="product1.html">星境再生晚安修復霜</a>
     <a href="product3.html">星煥美肌精華液</a>
     <a href="product4.html">星眸緊緻賦活眼霜</a>
     <a href="product5.html">星河絲柔撕拉面膜</a>
   </div>
-  
-  <!-- 導覽列 -->
-   <div class="section-top">
+
+  <div class="section-top">
     <div class="left-image">
       <div class="gallery">
         <div class="thumbnails">
-          <img src="產品2.jpg" onclick="changeImage(this, '產品2.jpg')" class="active" />
-          <img src="眼霜 眼睛.JPG" onclick="changeImage(this, '眼霜 眼睛.JPG')" />
-          <img src="面霜 我.JPG" onclick="changeImage(this, '面霜 我.JPG')" />
+          <img src="產品2.JPG" onclick="changeImage(this, '產品2.JPG')" class="active" />
+          <img src="肥皂眼睛.jpg" onclick="changeImage(this, '肥皂眼睛.jpg')" />
+          <img src="全產品照.JPG" onclick="changeImage(this, '全產品照.JPG')" />
         </div>
         <div class="main-image">
-          <img id="mainDisplay" src="產品2.jpg" alt="主圖" />
+          <img id="mainDisplay" src="產品2.JPG" alt="主圖" />
         </div>
       </div>
     </div>
 
     <div class="right-text">
       <h1>星雲蠶絲面膜皂</h1>
-      <div class="price">NT$390</div>
+      <div class="price">NT$1,290</div>
       <button class="buy-button" onclick="window.location.href='#'">立即購買</button>
       <p>
 #適合全膚質每日使用
 嚴選橄欖油、甜杏仁油與荷荷巴油
 以冷製皂工藝，保留植物滋養成分
 富含蠶絲蛋白與維他命E，溫和潔淨同時深層滋潤
-
       </p>
     </div>
   </div>
 
   <div class="section-bottom">
     <img src="皂.png" alt="皂">
-    <p>
-      這裡是下半部補充說明，<br>
-      。
-    </p>
+    <img src="皂 產品介紹.png" alt="皂 產品介紹">
+    <img src="肥皂形象照.jpg" alt="肥皂形象照">
+    <p>Awaken your cosmic energy, shine with infinite possibilities.<br></p>
   </div>
 
   <a href="index.html" class="back-link">← 回到首頁</a>
 
+  <!-- Modal 放大圖 -->
+  <div class="modal" id="imageModal">
+    <img id="modalImage" src="" alt="放大圖">
+  </div>
+
   <script>
-  const mainImage = document.getElementById("mainDisplay");
-  const thumbnails = Array.from(document.querySelectorAll(".thumbnails img"));
-  let currentIndex = 0;
+    const mainImage = document.getElementById("mainDisplay");
+    const thumbnails = Array.from(document.querySelectorAll(".thumbnails img"));
+    let currentIndex = 0;
 
-  // 設定初始索引
-  function updateImageByIndex(index) {
-    if (index < 0) index = thumbnails.length - 1;
-    if (index >= thumbnails.length) index = 0;
-    currentIndex = index;
-    const selectedThumb = thumbnails[currentIndex];
-    changeImage(selectedThumb, selectedThumb.src);
-  }
+    const modal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("modalImage");
 
-  // 加入滑動事件監聽器
-  let startX = 0;
-  mainImage.addEventListener("touchstart", function(e) {
-    startX = e.touches[0].clientX;
-  });
-
-  mainImage.addEventListener("touchend", function(e) {
-    const endX = e.changedTouches[0].clientX;
-    const diffX = endX - startX;
-
-    if (Math.abs(diffX) > 50) {
-      if (diffX > 0) {
-        // 向右滑動（上一張）
-        updateImageByIndex(currentIndex - 1);
-      } else {
-        // 向左滑動（下一張）
-        updateImageByIndex(currentIndex + 1);
-      }
+    function updateImageByIndex(index) {
+      if (index < 0) index = thumbnails.length - 1;
+      if (index >= thumbnails.length) index = 0;
+      currentIndex = index;
+      const selectedThumb = thumbnails[currentIndex];
+      changeImage(selectedThumb, selectedThumb.src);
     }
-  });
 
-  // 原有點擊縮圖功能（更新 currentIndex）
-  function changeImage(thumb, newSrc) {
-    document.getElementById("mainDisplay").src = newSrc;
-    thumbnails.forEach((img, index) => {
-      img.classList.remove("active");
-      if (img === thumb) currentIndex = index;
+    function changeImage(thumb, newSrc) {
+      mainImage.src = newSrc;
+      thumbnails.forEach((img, index) => {
+        img.classList.remove("active");
+        if (img === thumb) currentIndex = index;
+      });
+      thumb.classList.add("active");
+    }
+
+    let startX = 0;
+    mainImage.addEventListener("touchstart", e => startX = e.touches[0].clientX);
+    mainImage.addEventListener("touchend", e => {
+      const diffX = e.changedTouches[0].clientX - startX;
+      if (Math.abs(diffX) > 50) {
+        if (diffX > 0) updateImageByIndex(currentIndex - 1);
+        else updateImageByIndex(currentIndex + 1);
+      }
     });
-    thumb.classList.add("active");
-  }
-</script>
+
+    mainImage.addEventListener("click", () => {
+      modalImg.src = mainImage.src;
+      modal.style.display = "flex";
+    });
+
+    function closeModal() {
+      modal.style.display = "none";
+    }
+
+    modal.addEventListener("click", closeModal);
+
+    let modalStartX = 0;
+    modalImg.addEventListener("touchstart", e => modalStartX = e.touches[0].clientX);
+    modalImg.addEventListener("touchend", e => {
+      const diffX = e.changedTouches[0].clientX - modalStartX;
+      if (Math.abs(diffX) > 50) {
+        if (diffX > 0) switchModalImage(-1);
+        else switchModalImage(1);
+      }
+    });
+
+    function switchModalImage(direction) {
+      updateImageByIndex(currentIndex + direction);
+      modalImg.src = thumbnails[currentIndex].src;
+    }
+
+    document.addEventListener("keydown", function(e) {
+      if (modal.style.display === "flex") {
+        if (e.key === "Escape") closeModal();
+        if (e.key === "ArrowRight") switchModalImage(1);
+        if (e.key === "ArrowLeft") switchModalImage(-1);
+      }
+    });
+  </script>
 </body>
 </html>
-
