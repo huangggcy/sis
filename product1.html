@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>產品1 - 星境再生晚安修復霜</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -20,14 +18,10 @@
     .logo-wrapper {
       background-color: white;
       padding: 0.5rem 0;
-      margin: 0;
       text-align: center;
     }
 
-    .logo-wrapper a {
-      display: inline-block;
-    }
-
+    .logo-wrapper a { display: inline-block; }
     .logo {
       width: 180px;
       max-width: 80%;
@@ -184,6 +178,29 @@
       max-height: 90vh;
       max-width: 100%;
       border-radius: 10px;
+      cursor: zoom-in;
+    }
+
+    /* 放大圖的樣式 */
+    .image-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .image-modal img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+      cursor: zoom-out;
     }
   </style>
 </head>
@@ -194,7 +211,7 @@
     </a>
   </div>
 
- <div class="nav-products">
+  <div class="nav-products">
     <a href="index.html">首頁</a>
     <a href="product2.html">星雲蠶絲面膜皂</a>
     <a href="product3.html">星煥美肌精華液</a>
@@ -202,8 +219,7 @@
     <a href="product5.html">星河絲柔撕拉面膜</a>
   </div>
 
-  <!-- 導覽列 -->
-   <div class="section-top">
+  <div class="section-top">
     <div class="left-image">
       <div class="gallery">
         <div class="thumbnails">
@@ -233,59 +249,70 @@
 
   <div class="section-bottom">
     <img src="修復霜.png" alt="修復霜">
-    <p>
-      這裡是下半部補充說明區塊，<br>
-      
-    </p>
+    <p>這裡是下半部補充說明區塊，<br></p>
   </div>
 
   <a href="index.html" class="back-link">← 回到首頁</a>
 
+  <!-- 放大圖片的 Modal -->
+  <div class="image-modal" id="imageModal" onclick="closeModal()">
+    <img id="modalImage" src="" alt="放大圖">
+  </div>
+
   <script>
-  const mainImage = document.getElementById("mainDisplay");
-  const thumbnails = Array.from(document.querySelectorAll(".thumbnails img"));
-  let currentIndex = 0;
+    const mainImage = document.getElementById("mainDisplay");
+    const thumbnails = Array.from(document.querySelectorAll(".thumbnails img"));
+    let currentIndex = 0;
 
-  // 設定初始索引
-  function updateImageByIndex(index) {
-    if (index < 0) index = thumbnails.length - 1;
-    if (index >= thumbnails.length) index = 0;
-    currentIndex = index;
-    const selectedThumb = thumbnails[currentIndex];
-    changeImage(selectedThumb, selectedThumb.src);
-  }
-
-  // 加入滑動事件監聽器
-  let startX = 0;
-  mainImage.addEventListener("touchstart", function(e) {
-    startX = e.touches[0].clientX;
-  });
-
-  mainImage.addEventListener("touchend", function(e) {
-    const endX = e.changedTouches[0].clientX;
-    const diffX = endX - startX;
-
-    if (Math.abs(diffX) > 50) {
-      if (diffX > 0) {
-        // 向右滑動（上一張）
-        updateImageByIndex(currentIndex - 1);
-      } else {
-        // 向左滑動（下一張）
-        updateImageByIndex(currentIndex + 1);
-      }
+    function updateImageByIndex(index) {
+      if (index < 0) index = thumbnails.length - 1;
+      if (index >= thumbnails.length) index = 0;
+      currentIndex = index;
+      const selectedThumb = thumbnails[currentIndex];
+      changeImage(selectedThumb, selectedThumb.src);
     }
-  });
 
-  // 原有點擊縮圖功能（更新 currentIndex）
-  function changeImage(thumb, newSrc) {
-    document.getElementById("mainDisplay").src = newSrc;
-    thumbnails.forEach((img, index) => {
-      img.classList.remove("active");
-      if (img === thumb) currentIndex = index;
+    // 切換圖片
+    function changeImage(thumb, newSrc) {
+      mainImage.src = newSrc;
+      thumbnails.forEach((img, index) => {
+        img.classList.remove("active");
+        if (img === thumb) currentIndex = index;
+      });
+      thumb.classList.add("active");
+    }
+
+    // 滑動切換圖片（行動裝置）
+    let startX = 0;
+    mainImage.addEventListener("touchstart", function(e) {
+      startX = e.touches[0].clientX;
     });
-    thumb.classList.add("active");
-  }
-</script>
+
+    mainImage.addEventListener("touchend", function(e) {
+      const endX = e.changedTouches[0].clientX;
+      const diffX = endX - startX;
+
+      if (Math.abs(diffX) > 50) {
+        if (diffX > 0) {
+          updateImageByIndex(currentIndex - 1);
+        } else {
+          updateImageByIndex(currentIndex + 1);
+        }
+      }
+    });
+
+    // 點擊主圖放大
+    mainImage.addEventListener("click", function () {
+      const modal = document.getElementById("imageModal");
+      const modalImg = document.getElementById("modalImage");
+      modalImg.src = mainImage.src;
+      modal.style.display = "flex";
+    });
+
+    // 關閉放大圖
+    function closeModal() {
+      document.getElementById("imageModal").style.display = "none";
+    }
+  </script>
 </body>
 </html>
-
